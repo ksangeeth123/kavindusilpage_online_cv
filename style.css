@@ -45,6 +45,7 @@ body {
     padding: 10px 20px;
     margin: 0;
     font-size: 16px;
+    line-height:1.2;
 }
 
 .sidebar ul li a {
