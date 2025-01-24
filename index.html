@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kavindu Sangeeth Silpage - Online CV</title>
-    <link rel="icon" href="images/ico/icons8_info_1.ico" type="image/x-icon"> <!-- ico image -->
+    <link rel="icon" href="images/ico/icons8_info_1.ico" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-    <script src="script1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script src="script1.js" defer></script>
 </head>
 <body>
     <nav class="sidebar">
@@ -289,16 +289,42 @@
             e.preventDefault();
             alert("Copying content is disabled on this page.");
         });
+    </script>
 
-        // Encode the URL
-const originalUrl = "https://kavindusilpage-online-cv.vercel.app/";
-const encodedUrl = btoa(originalUrl);
-console.log("Encoded URL:", encodedUrl);
+      <script>
+        // Encryption key for URLs
+        const encryptionKey = "mySecretKey123"; // Replace with your key
 
-// Decode the URL
-const decodedUrl = atob(encodedUrl);
-console.log("Decoded URL:", decodedUrl);
+        // Function to encrypt a URL
+        function encryptURL(url) {
+            return CryptoJS.AES.encrypt(url, encryptionKey).toString();
+        }
 
+        // Function to decrypt a URL
+        function decryptURL(encryptedURL) {
+            const bytes = CryptoJS.AES.decrypt(encryptedURL, encryptionKey);
+            return bytes.toString(CryptoJS.enc.Utf8);
+        }
+
+        // Example usage: Encrypting a GitHub URL
+        const githubLink = "https://github.com/ksangeeth123";
+        const encryptedLink = encryptURL(githubLink);
+        console.log("Encrypted URL:", encryptedLink);
+
+        // Decrypting and using the URL in the document
+        const decryptedLink = decryptURL(encryptedLink);
+        console.log("Decrypted URL:", decryptedLink);
+
+        // Applying encrypted link to an anchor tag
+        const githubAnchor = document.querySelector('a[href="https://github.com/ksangeeth123"]');
+        if (githubAnchor) {
+            githubAnchor.href = encryptedLink; // Encrypted link for security
+            githubAnchor.addEventListener("click", (event) => {
+                event.preventDefault();
+                const originalURL = decryptURL(encryptedLink);
+                window.open(originalURL, "_blank");
+            });
+        }
     </script>
     
 </body>
