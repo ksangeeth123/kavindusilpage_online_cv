@@ -289,6 +289,16 @@
             e.preventDefault();
             alert("Copying content is disabled on this page.");
         });
+
+        // Encode the URL
+const originalUrl = "https://kavindusilpage-online-cv.vercel.app/";
+const encodedUrl = btoa(originalUrl);
+console.log("Encoded URL:", encodedUrl);
+
+// Decode the URL
+const decodedUrl = atob(encodedUrl);
+console.log("Decoded URL:", decodedUrl);
+
     </script>
     
 </body>
